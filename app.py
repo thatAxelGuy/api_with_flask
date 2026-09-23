@@ -1,8 +1,8 @@
 import logging
+
 from flask import Flask, jsonify, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-
 
 app = Flask(__name__)
 limiter = Limiter(
@@ -160,10 +160,7 @@ def delete_book(id):
   return jsonify(book), 200
 
 def validate_book_data(data):
-  if "title" not in data or "author" not in data:
-    return False
-  return True
-
+  return "title" not in data or "author" not in data
 
 @app.route('/api/books', methods=['GET', 'POST'])
 @limiter.limit('10/minute')
